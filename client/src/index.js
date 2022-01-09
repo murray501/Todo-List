@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Show from './Show';
 
+import "bulma/css/bulma.css";
 import {
   ApolloClient,
   InMemoryCache,
@@ -18,8 +18,12 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
-    <Show />
+    <section class="section">
+      <div class="container">
+        <App />
+      </div>
+    </section>
   </ApolloProvider>,
   document.getElementById('root')
 );
+
