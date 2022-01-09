@@ -1,24 +1,6 @@
-import React, {useReducer, useEffect, useContext} from 'react';
-import {UpdateContext} from './App';
-import {
-  useQuery,
-  gql
-} from "@apollo/client";
+import React, {useReducer} from 'react';
 
-const SHOW = gql`
-query ShowQuery {
-  total
-  all {
-    id
-    title
-    complete
-  }
-}
-`
-export default function List() {
-  console.log("list is called");
-  const {loading, error, data} = useQuery(SHOW);
-
+export default function List({loading, error, data}) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :</p>;
   return (
@@ -39,7 +21,7 @@ export default function List() {
 function TableHeader() {
   return (
     <tr>
-      <th>ID</th>
+      <th class="is-narrow">ID  </th>
       <th>Todo</th>
       <th class="is-narrow">
         <p>complete/not</p>
