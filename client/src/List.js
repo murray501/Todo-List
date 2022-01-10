@@ -1,4 +1,5 @@
 import React, {useReducer} from 'react';
+import Checkbox from './Checkbox';
 
 export default function List({loading, error, data}) {
   if (loading) return <p>Loading...</p>;
@@ -42,12 +43,3 @@ function ListItem({id, title, complete}) {
   )
 }
 
-function Checkbox({complete}) {
-  const [checked, toggle] = useReducer(checked => !checked, complete);
-  return (
-    <label class="checkbox">
-      <input type="checkbox" checked={checked} onChange={toggle} />
-        {checked ? "complete" : "not"}
-    </label>
-  )
-}

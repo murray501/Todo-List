@@ -1,47 +1,18 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext} from 'react';
 import List from './List';
 import AddItem from './AddItem';
+import { CommandShow } from './Command';
 
-import {
-  useQuery,
-  useMutation,
-  gql
-} from "@apollo/client";
+export const UpdateContext = createContext();
 
-const SHOW = gql`
-query ShowQuery {
-  total
-  all {
-    id
-    title
-    complete
-  }
-}
-`
-const ADD_TODO = gql`
-  mutation AddTodo($text: String!) {
-    newTodo(title: $text) {
-      id
-      title
-      complete
-    }
-  }
-`;
-
-function App() {
-  const {loading, error, data, refetch} = useQuery(SHOW);
-  const [addTodo, {loading2, error2 }] = useMutation(ADD_TODO, {
-    onCompleted() {
-      refetch();
-    }
-  });
+export function App() {
+  const {loading, error, data, refetch} = CommandShow();
 
   return (
-      <>
-      <AddItem addTodo={addTodo} loading={loading2} error={error2} />
-      <List loading={loading} error={error} data={data}/>
-      </>
+      <UpdateContext.Provider value={{refetch}}>
+        <AddItem />
+        <List loading={loading} error={error} data={data}/>
+      </UpdateContext.Provider>
   );
 }
 
-export default App;

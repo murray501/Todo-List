@@ -8,9 +8,3 @@ export function useInput(initialValue) {
     ];
 }
 
-export function Checkbox(initialValue) {
-    const [checked, toggle] = useReducer(checked => !checked, initialValue);
-    return (
-        <input type="checkbox" value={checked} onChange={toggle} />
-    )
-}

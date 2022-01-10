@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useInput } from "./hooks";
+import {UpdateContext} from "./App";
+import {AddTodo} from "./Command";
 
-export default function AddItem({addTodo, loading, error}) {
+export default function AddItem() {
+  const { refetch } = useContext(UpdateContext);  
+  const [addTodo, {loading, error}] = AddTodo(refetch);
+
   const [titleProps, resetTitle] = useInput("");
   const submit = e => {
     e.preventDefault();
