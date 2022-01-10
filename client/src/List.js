@@ -37,7 +37,7 @@ function ListItem({id, title, complete}) {
       <td>{id}</td>
       <td>{title}</td>
       <td>
-        <Checkbox complete={complete}/>
+        <Checkbox id={id} complete={complete}/>
       </td>
     </tr>
   )

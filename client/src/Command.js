@@ -38,3 +38,22 @@ export function AddTodo(refetch) {
   });
   return [addTodo, {loading, error}];
 }
+
+const CHANGE_COMPLETE = gql`
+  mutation ChangeComplete($id: ID!, $complete: Boolean!) {
+    changeComplete(id: $id, complete: $complete) {
+      id
+      title
+      complete
+    }
+  }
+`;
+
+export function ChangeComplete(refetch) {
+  const [changeComplete, {loading, error}] = useMutation(CHANGE_COMPLETE, {
+    onCompleted() {
+      refetch();
+    }
+  });
+  return [changeComplete, {loading, error}];
+}

@@ -14,8 +14,8 @@ const typeDefs = `
 
     type Mutation {
         newTodo(title: String!): Todo!
-        changeTitle(id: ID!, title: String!): Todo
-        changeComplete(id: ID!, complete: Boolean!): Todo
+        changeTitle(id: ID!, title: String!): Todo!
+        changeComplete(id: ID!, complete: Boolean!): Todo!
     }
 `
 
