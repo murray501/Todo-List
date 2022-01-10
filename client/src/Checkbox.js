@@ -2,8 +2,7 @@ import React, {useReducer, useContext} from 'react';
 import {UpdateContext} from "./App";
 import {ChangeComplete} from "./Command";
 
-export default function Checkbox({id, complete}) {
-    //const id = parseInt(_id);
+export default function Checkbox({id, complete, disabled}) {
     const { refetch } = useContext(UpdateContext); 
     const [changeComplete, {loading, error}] = ChangeComplete(refetch);
     const [checked, toggle] = useReducer(checked => {
@@ -17,7 +16,10 @@ export default function Checkbox({id, complete}) {
   
     return (
       <label class="checkbox">
-        <input type="checkbox" checked={checked} onChange={toggle} />
+        {disabled ? 
+         <input type="checkbox" checked={checked} onChange={toggle} disabled/> :
+         <input type="checkbox" checked={checked} onChange={toggle} />
+        }
           {checked ? "complete" : "not"}
       </label>
     )

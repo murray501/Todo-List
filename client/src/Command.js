@@ -14,7 +14,7 @@ const SHOW = gql`
     }
   }
   `
-
+  
 export function CommandShow() {
     const {loading, error, data, refetch} = useQuery(SHOW);
     return {loading, error, data, refetch}; 
@@ -56,4 +56,23 @@ export function ChangeComplete(refetch) {
     }
   });
   return [changeComplete, {loading, error}];
+}
+
+const CHANGE_TITLE = gql`
+  mutation ChangeTitle($id: ID!, $title: String!) {
+    changeTitle(id: $id, title: $title) {
+      id
+      title
+      complete
+    }
+  }
+`;
+
+export function ChangeTitle(refetch) {
+  const [changeTitle, {loading, error}] = useMutation(CHANGE_TITLE, {
+    onCompleted() {
+      refetch();
+    }
+  });
+  return [changeTitle, {loading, error}];
 }
