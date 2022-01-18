@@ -16,6 +16,7 @@ const typeDefs = `
         newTodo(title: String!): Todo!
         changeTitle(id: ID!, title: String!): Todo!
         changeComplete(id: ID!, complete: Boolean!): Todo!
+        delete(id: ID!): ID!
     }
 `
 
@@ -55,6 +56,12 @@ const resolvers = {
                 old.complete = args.complete;
                 return old;
             }
+        },
+
+        delete(parent, args) {
+            const id = parseInt(args.id);
+            todos = todos.filter(x => x.id !== id)
+            return id;
         }
     }
 }

@@ -76,3 +76,18 @@ export function ChangeTitle(refetch) {
   });
   return [changeTitle, {loading, error}];
 }
+
+const DELETE = gql`
+  mutation Delete($id: ID!) {
+    delete(id: $id) 
+  }
+`;
+
+export function Delete(refetch) {
+  const [deleteItem, {loading, error}] = useMutation(DELETE, {
+    onCompleted() {
+      refetch();
+    }
+  });
+  return [deleteItem, {loading, error}];
+}
