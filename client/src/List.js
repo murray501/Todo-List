@@ -3,12 +3,17 @@ import Checkbox from './Checkbox';
 import EditItem from './EditItem';
 import {Delete} from "./Command";
 import {UpdateContext} from "./App";
+import Navigation from './Nav';
 
 export default function List({loading, error, data}) {
+  const [navProp, state] = Navigation();
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :</p>;
+
   return (
     <table class="table is-hoverable box">
+      {navProp}
       <thead>
         <TableHeader />
       </thead>
@@ -16,10 +21,21 @@ export default function List({loading, error, data}) {
         <TableHeader />
       </tfoot>
       <tbody>
-        {data.all.map(({id, title, complete}) => <ListItem id={id} title={title} complete={complete} />)}
+        { state === "All" ? <ListAll data={data.all} /> : 
+          state === "Complete" ? <ListAll data={data.all.filter(({id, title, complete}) => complete)} /> :
+          <ListAll data={data.all.filter(({id, title, complete}) => !complete)} />
+        } 
       </tbody>
     </table>
   )
+}
+
+function ListAll({data}) {
+  return (
+      <>
+      {data.map(({id, title, complete}) => <ListItem id={id} title={title} complete={complete} />)}
+      </>
+  );
 }
 
 function TableHeader() {
@@ -39,7 +55,6 @@ function ListItem({id, title, complete}) {
   const [deleteItem, {loading, error}] = Delete(refetch);
 
   function deleteMe (id) {
-    console.log("deleteMe is called id = " + id);
     deleteItem({variables: {id: id}})
   } 
 

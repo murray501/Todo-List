@@ -1,15 +1,14 @@
-import React, {useReducer, useContext} from 'react';
+import React, {useReducer, useContext, useState} from 'react';
 import {UpdateContext} from "./App";
 import {ChangeComplete} from "./Command";
 
 export default function Checkbox({id, complete, disabled}) {
     const { refetch } = useContext(UpdateContext); 
     const [changeComplete, {loading, error}] = ChangeComplete(refetch);
-    const [checked, toggle] = useReducer(checked => {
-      const newValue = !checked;
-      changeComplete({variables: {id: id, complete: newValue}})
-      return newValue;
-    }, complete);
+
+    const toggle = () => {
+      changeComplete({variables: {id: id, complete: !complete}})
+    }
 
     if (loading) return 'Submitting...';
     if (error) return `Submission error! ${error.message}`;
@@ -17,10 +16,10 @@ export default function Checkbox({id, complete, disabled}) {
     return (
       <label class="checkbox">
         {disabled ? 
-         <input type="checkbox" checked={checked} onChange={toggle} disabled/> :
-         <input type="checkbox" checked={checked} onChange={toggle} />
+         <input type="checkbox" checked={complete} onChange={toggle} disabled/> :
+         <input type="checkbox" checked={complete} onChange={toggle} />
         }
-          {checked ? "complete" : "not"}
+          {complete ? "complete" : "not"}
       </label>
     )
   }
