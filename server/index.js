@@ -1,76 +1,38 @@
-const { ApolloServer } = require('apollo-server')
+const { ApolloServer } = require('apollo-server');
+const { MongoClient } = require('mongodb');
+const { readFileSync } = require('fs');
 
-const typeDefs = `
-    type Todo {
-        id: ID!
-        title: String!
-        complete: Boolean!
+const resolvers = require('./resolvers');
+require('dotenv').config()
+const typeDefs = readFileSync('./typeDefs.graphql', 'UTF-8');
+
+async function start() {
+    const MONGO_DB = process.env.DB_HOST
+    let db
+
+    try {
+        const client = await MongoClient.connect(MONGO_DB, { useNewUrlParser: true})
+        db = client.db()
+    } catch (error) {
+        console.log(`
+            MONGO DB HOST not found!
+            add DB_HOST env varible to .env file
+            exiting...
+        `)
+        process.exit(1)
     }
 
-    type Query {
-        total: Int!
-        all: [Todo!]!
-    }
+    const context = { db }
 
-    type Mutation {
-        newTodo(title: String!): Todo!
-        changeTitle(id: ID!, title: String!): Todo!
-        changeComplete(id: ID!, complete: Boolean!): Todo!
-        delete(id: ID!): ID!
-    }
-`
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers,
+        context
+    })
 
-var id = 0
-var todos = []
-
-const resolvers = {
-    Query: {
-        total: () => todos.length,
-        all: () => todos
-    },
-
-    Mutation: {
-        newTodo(parent, args) {
-            var newtodo = {
-                id: ++id,
-                ...args,
-                complete: false
-            }
-            todos.push(newtodo)
-            return newtodo
-        },
-
-        changeTitle(parent, args) {
-            const id = parseInt(args.id);
-            const old = todos.find(x => x.id === id);
-            if (old) {
-                old.title = args.title;
-                return old;
-            }
-        },
-
-        changeComplete(parent, args) {
-            const id = parseInt(args.id);
-            const old = todos.find(x => x.id === id);
-            if (old) {
-                old.complete = args.complete;
-                return old;
-            }
-        },
-
-        delete(parent, args) {
-            const id = parseInt(args.id);
-            todos = todos.filter(x => x.id !== id)
-            return id;
-        }
-    }
-}
-
-const server = new ApolloServer({
-    typeDefs,
-    resolvers
-})
-
-server
+    server
     .listen()
     .then(({url}) => console.log(`GraphQL Service running on ${url}`))
+}    
+
+start()

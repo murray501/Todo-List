@@ -9,7 +9,7 @@ export default function List({loading, error, data}) {
   const [navProp, state] = Navigation();
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :</p>;
+  if (error) return <p>Error : {error} </p>;
 
   return (
     <table class="table is-hoverable box">
@@ -22,8 +22,8 @@ export default function List({loading, error, data}) {
       </tfoot>
       <tbody>
         { state === "All" ? <ListAll data={data.all} /> : 
-          state === "Complete" ? <ListAll data={data.all.filter(({id, title, complete}) => complete)} /> :
-          <ListAll data={data.all.filter(({id, title, complete}) => !complete)} />
+          state === "Complete" ? <ListAll data={data.all.filter(({_id, title, complete}) => complete)} /> :
+          <ListAll data={data.all.filter(({_id, title, complete}) => !complete)} />
         } 
       </tbody>
     </table>
@@ -33,7 +33,7 @@ export default function List({loading, error, data}) {
 function ListAll({data}) {
   return (
       <>
-      {data.map(({id, title, complete}) => <ListItem id={id} title={title} complete={complete} />)}
+      {data.map(({_id, title, complete}) => <ListItem id={_id} title={title} complete={complete} />)}
       </>
   );
 }

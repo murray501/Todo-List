@@ -8,7 +8,7 @@ const SHOW = gql`
   query ShowQuery {
     total
     all {
-      id
+      _id
       title
       complete
     }
@@ -23,7 +23,7 @@ export function CommandShow() {
 const ADD_TODO = gql`
   mutation AddTodo($text: String!) {
     newTodo(title: $text) {
-      id
+      _id
       title
       complete
     }
@@ -42,7 +42,7 @@ export function AddTodo(refetch) {
 const CHANGE_COMPLETE = gql`
   mutation ChangeComplete($id: ID!, $complete: Boolean!) {
     changeComplete(id: $id, complete: $complete) {
-      id
+      _id
       title
       complete
     }
@@ -61,7 +61,7 @@ export function ChangeComplete(refetch) {
 const CHANGE_TITLE = gql`
   mutation ChangeTitle($id: ID!, $title: String!) {
     changeTitle(id: $id, title: $title) {
-      id
+      _id
       title
       complete
     }
