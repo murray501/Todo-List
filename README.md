@@ -7,7 +7,7 @@ Editable Todo list
   5. Show all or complete or not complete list
 
 ## How to run ?
-
-### Install mongoDB
+### Install mongoDB (Debian)
+  
 
 
