@@ -34,6 +34,17 @@ Editable Todo list
 ## What are implemented?
 
 ### Server
+  1. graphQL -> use apollo-server
+  2. mongodb -> for data storage
+
+### Client
+  1. graphQL -> use appllo-client
+  2. react
+  3. bulma -> for CSS
+  
+  
+  
+
 
   
 
