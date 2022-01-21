@@ -22,5 +22,13 @@ Editable Todo list
   4. mongo --eval 'db.runCommand({ connectionStatus: 1 })'
 
 ### Start server
+  1. cd server
+  2. npm install
+  3. npm start -> server run (http://localhost:4000)
+
+### Start Client
+  1. cd client
+  2. npm install
+  3. npm start -> client run (http://localhost:3000)
   
 
