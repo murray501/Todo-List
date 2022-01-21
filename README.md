@@ -15,7 +15,7 @@ Editable Todo list
   5. sudo apt-get install -y mongodb-org
   6. mongod --version
 
-### Add Init List
+### Add Init List (MongoDB)
   1. https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d | sudo tee /etc/init.d/mongodb >/dev/null
   2. sudo chmod +x /etc/init.d/mongodb
   3. sudo service mongodb start
@@ -30,5 +30,10 @@ Editable Todo list
   1. cd client
   2. npm install
   3. npm start -> client run (http://localhost:3000)
+
+## What are implemented?
+
+### Server
+
   
 
