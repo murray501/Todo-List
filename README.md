@@ -7,7 +7,7 @@ Editable Todo list
   5. Show all or complete or not complete list
 
 ## How to run ?
-### Install mongoDB (Debian)
+### Install mongoDB
   1. sudo apt update
   2. wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
   3. echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
