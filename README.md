@@ -35,6 +35,11 @@ Editable Todo list
   1. cd client-next
   2. npm run dev -> client run (http://localhost:3000)
 
+### Start only Server (no need to run client)
+  1. cd server-next
+  2. npm install
+  3. npm start -> server and client run (http://localhost:4000)
+
 ## What are implemented?
 
 ### Server
