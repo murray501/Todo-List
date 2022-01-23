@@ -27,9 +27,13 @@ Editable Todo list
   3. npm start -> server run (http://localhost:4000)
 
 ### Start Client
+#### React version
   1. cd client
   2. npm install
   3. npm start -> client run (http://localhost:3000)
+#### NextJS version
+  1. cd client-next
+  2. npm run dev -> client run (http://localhost:3000)
 
 ## What are implemented?
 
