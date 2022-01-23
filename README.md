@@ -44,7 +44,8 @@ Editable Todo list
 ### Client
   1. graphQL -> use appllo-client
   2. react
-  3. bulma -> for CSS
+  3. nextjs
+  4. bulma -> for CSS
   
   
   
